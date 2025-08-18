@@ -1,0 +1,40 @@
+name: mail
+
+on:
+  push:
+    branches:
+      - '**'  # Match all branches
+  pull_request:
+    branches:
+      - '**'  # Match all target branches of pull requests
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
+
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo Hello, world!
+
+      - name: Send mail
+        uses: dawidd6/action-send-mail@v5
+          connection_url: ${{ secrets.MAIL_CONNECTION }}
+          subject: test
+          to: ${{ secrets.MAIL_TO }}
+          #cc: ${{ secrets.MAIL_CC }}
+          from: Github Action Workflow <ycchen005@gmail.com>
+          body: |
+            Hello,
+
+            test.
+
+            Best regards,
