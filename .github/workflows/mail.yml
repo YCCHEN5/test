@@ -32,7 +32,7 @@ jobs:
           subject: test
           to: ${{ secrets.MAIL_TO }}
           #cc: ${{ secrets.MAIL_CC }}
-          from: Github Action Workflow <ycchen005@gmail.com>
+          from: Github Action Workflow
           body: |
             Hello,
 
